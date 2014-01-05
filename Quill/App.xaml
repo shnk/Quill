@@ -1,5 +1,14 @@
-<Application x:Class="Quill.App" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="using:Quill">
+<prism:MvvmAppBase x:Class="Quill.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:prism="using:Microsoft.Practices.Prism.StoreApps"
+             xmlns:local="using:Quill">
+    
   <Application.Resources>
-    <vm:ViewModelLocator x:Key="Locator" xmlns:vm="using:Quill.ViewModel" />
-  </Application.Resources>
-</Application>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+            </ResourceDictionary.MergedDictionaries>
+            <x:String x:Key="AppName">Quill</x:String>
+        </ResourceDictionary>
+    </Application.Resources>
+</prism:MvvmAppBase>
