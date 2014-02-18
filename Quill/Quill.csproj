@@ -17,7 +17,7 @@
     <PackageCertificateKeyFile>Quill_TemporaryKey.pfx</PackageCertificateKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x64</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -109,6 +109,11 @@
     <Compile Include="Common\ObservableDictionary.cs" />
     <Compile Include="Common\RelayCommand.cs" />
     <Compile Include="Common\SuspensionManager.cs" />
+    <Compile Include="Models\BlogInfo.cs" />
+    <Compile Include="Models\CategoryInfo.cs" />
+    <Compile Include="Models\MediaObjectInfo.cs" />
+    <Compile Include="Models\PostInfo.cs" />
+    <Compile Include="Models\UserInfo.cs" />
     <Compile Include="Services\DataRepository.cs" />
     <Compile Include="Services\IDataRepository.cs" />
     <Compile Include="ViewModels\BlogAccountViewModel.cs" />
@@ -150,11 +155,15 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="MetaWeblog.Portable">
-      <HintPath>..\packages\MetaWeblog.Portable.0.9.1\lib\portable-net45+wp8+win8\MetaWeblog.Portable.dll</HintPath>
+    <Reference Include="MetaWeblog.Portable, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\MetaWeblog.Portable.0.9.2\lib\portable-net45+wp8+win8\MetaWeblog.Portable.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.Prism.StoreApps">
       <HintPath>..\packages\Prism.StoreApps.1.1.0\lib\windows8\Microsoft.Practices.Prism.StoreApps.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.NetCore">
+      <HintPath>..\packages\Unity.3.0.1304.1\lib\NetCore45\Microsoft.Practices.Unity.NetCore.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Threading.Tasks">
       <HintPath>..\packages\Microsoft.Bcl.Async.1.0.165\lib\win8\Microsoft.Threading.Tasks.dll</HintPath>
@@ -177,6 +186,11 @@
     <Reference Include="System.Net.Http.Primitives">
       <HintPath>..\packages\Microsoft.Net.Http.2.2.18\lib\win8\System.Net.Http.Primitives.dll</HintPath>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <SDKReference Include="RadControls for Windows 8, Version=2013.3.1105">
+      <Name>RadControls for Windows 8</Name>
+    </SDKReference>
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">

@@ -1,19 +1,9 @@
 ﻿using Quill.Common;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Windows.Input;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 // The Split Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234234
@@ -34,7 +24,10 @@ namespace Quill.Views
         /// </summary>
         public ObservableDictionary DefaultViewModel
         {
-            get { return this.defaultViewModel; }
+            get
+            {
+                return this.defaultViewModel;
+            }
         }
 
         /// <summary>
@@ -43,7 +36,10 @@ namespace Quill.Views
         /// </summary>
         public NavigationHelper NavigationHelper
         {
-            get { return this.navigationHelper; }
+            get
+            {
+                return this.navigationHelper;
+            }
         }
 
         public BlogAccountPage()
@@ -89,7 +85,6 @@ namespace Quill.Views
         {
             // TODO: Assign a bindable group to Me.DefaultViewModel("Group")
             // TODO: Assign a collection of bindable items to Me.DefaultViewModel("Items")
-
             if (e.PageState == null)
             {
                 // When this is a new page, select the first item automatically unless logical page
@@ -106,7 +101,6 @@ namespace Quill.Views
                 {
                     // TODO: Invoke Me.itemsViewSource.View.MoveCurrentTo() with the selected
                     //       item as specified by the value of pageState("SelectedItem")
-
                 }
             }
         }
@@ -125,7 +119,6 @@ namespace Quill.Views
             {
                 // TODO: Derive a serializable navigation parameter and assign it to
                 //       pageState("SelectedItem")
-
             }
         }
 
@@ -172,7 +165,8 @@ namespace Quill.Views
             // an item is selected this has the effect of changing from displaying the item list
             // to showing the selected item's details.  When the selection is cleared this has the
             // opposite effect.
-            if (this.UsingLogicalPageNavigation()) this.InvalidateVisualState();
+            if (this.UsingLogicalPageNavigation())
+                this.InvalidateVisualState();
         }
 
         private bool CanGoBack()
@@ -186,6 +180,7 @@ namespace Quill.Views
                 return this.navigationHelper.CanGoBack();
             }
         }
+
         private void GoBack()
         {
             if (this.UsingLogicalPageNavigation() && this.itemListView.SelectedItem != null)
@@ -249,7 +244,7 @@ namespace Quill.Views
         {
             navigationHelper.OnNavigatedFrom(e);
         }
-
+        
         #endregion
     }
 }

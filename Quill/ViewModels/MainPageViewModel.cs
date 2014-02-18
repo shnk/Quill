@@ -8,14 +8,13 @@ namespace Quill.ViewModels
     public class MainPageViewModel : ViewModel
     {
         private IDataRepository _dataRepository;
+        private INavigationService _navigationService;
 
-        public MainPageViewModel(IDataRepository dataRepository, INavigationService navService)
+        public MainPageViewModel(IDataRepository dataRepository, INavigationService navigationService)
         {
             _dataRepository = dataRepository;
-            NavigateCommand = new DelegateCommand(() => navService.Navigate("UserInput", null));
+            _navigationService = navigationService;
         }
-
-        public DelegateCommand NavigateCommand { get; set; }
 
         public List<string> DisplayItems
         {

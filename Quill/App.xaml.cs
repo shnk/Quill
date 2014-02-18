@@ -1,24 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Microsoft.Practices.Prism.StoreApps;
 using System.Threading.Tasks;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
 using Quill.Services;
 using Quill.ViewModels;
 using Quill.Views;
+using Microsoft.Practices.Unity;
+using Windows.Foundation;
+using Windows.Storage;
+using Windows.UI.Core;
 
 // The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=234227
 
@@ -29,6 +21,10 @@ namespace Quill
     /// </summary>
     sealed partial class App : MvvmAppBase
     {
+        private readonly IUnityContainer _container = new UnityContainer();
+        ApplicationDataContainer roamingSettings = null;
+        ApplicationData applicationData = null;
+
         // Declare any app services that you want to hold on to as singletons
         IDataRepository _dataRepository;
 
@@ -63,6 +59,12 @@ namespace Quill
         /// <param name="args">The same launch arguments passed when the app starts.</param>
         protected override void OnInitialize(IActivatedEventArgs args)
         {
+            applicationData = ApplicationData.Current;
+            roamingSettings = applicationData.RoamingSettings;
+
+            _container.RegisterInstance(NavigationService);
+            _container.RegisterInstance(SessionStateService);
+
             // New up the singleton data repository, and pass it the state service it depends on from the base class
             _dataRepository = new DataRepository(SessionStateService);
 
@@ -70,6 +72,19 @@ namespace Quill
             // dependent services from the factory method here.
             ViewModelLocator.Register(typeof(MainPage).ToString(), () => new MainPageViewModel(_dataRepository, NavigationService));
             //ViewModelLocator.Register(typeof(UserInputPage).ToString(), () => new UserInputPageViewModel(_dataRepository, NavigationService));
+
+            var dataChangedHandler = new TypedEventHandler<ApplicationData, object>(DataChangedHandler);
+            applicationData.DataChanged += dataChangedHandler;
+        }
+
+        protected override object Resolve(Type type)
+        {
+            return _container.Resolve(type);
+        }
+
+        void DataChangedHandler(Windows.Storage.ApplicationData appData, object o)
+        {
+
         }
     }
 }
